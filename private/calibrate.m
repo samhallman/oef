@@ -13,5 +13,5 @@ for i = 1:length(scales)
   opts.frac = frac(i);
   opts.scale = scales(i);
   [X,Y] = genCalibData(model,opts);
-  model.beta(i) = learn(X(:),Y(:));
+  model.beta(i) = learnBeta(X(:),Y(:));
 end

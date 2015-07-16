@@ -67,12 +67,13 @@ else for i=1:nTrees, trainTree(opts,stream,i); end; end
 
 % build model struct
 model = mergeTrees(opts); model.beta = [];
-if(opts.calibrate), model = calibrate(model); end
 % add test time options (can be changed later)
 opts=model.opts; opts.stride=opts.shrink;
 opts.nThreads=4; opts.nTreesEval=round(nTrees/2);
 opts.scales=[.25 .5 1 2]; opts.sharpen=[1 1 2 2];
 opts.collapse=1; opts.nms=0; model.opts=opts;
+% learn calibration weights model.beta
+if(opts.calibrate), model = calibrate(model); end
 % save model
 if(~exist(forestDir,'dir')), mkdir(forestDir); end
 save([forestFnm '.mat'], 'model', '-v7.3');

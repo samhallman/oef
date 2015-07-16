@@ -15,6 +15,9 @@ imDir = [opts.bsdsDir '/images/' opts.set '/'];
 ids=dir([imDir '*.jpg']); ids={ids.name};
 nImgs=length(ids); for i=1:nImgs, ids{i}=ids{i}(1:end-4); end
 
+% add path to Peter Kovesi's edge linking code
+addpath private/peterkovesi/
+
 % seed the RNG for reproducibility
 rng(opts.seed);
 
